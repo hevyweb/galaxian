@@ -25,9 +25,13 @@ html, body { height: 100%; width: 100%; margin: 0; }
     margin-left: -25px;
 }
 
-.gs_missile {
+.gs_missile, .gs_missile_running {
     width: 3px;
     height: 10px;
     background: orange;
     margin: 0  auto;
+}
+
+.gs_missile_running {
+    position: absolute;
 }
