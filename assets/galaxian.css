@@ -8,7 +8,7 @@ html, body { height: 100%; width: 100%; margin: 0; }
     height: 100%;
 }
 
-.gs_hero {
+.gx_hero {
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -17,7 +17,7 @@ html, body { height: 100%; width: 100%; margin: 0; }
     line-height: 1px;
 }
 
-.gs_hero_plain {
+.gx_hero_plain {
     background: red;
     width: 50px;
     height: 50px;
@@ -25,13 +25,47 @@ html, body { height: 100%; width: 100%; margin: 0; }
     margin-left: -25px;
 }
 
-.gs_missile, .gs_missile_running {
+.gx_missile, .gx_missile_running {
     width: 3px;
     height: 10px;
     background: orange;
     margin: 0  auto;
 }
 
-.gs_missile_running {
+.gx_missile_running {
     position: absolute;
+}
+
+.gx_enemy_row{
+    height: 40px;
+    width: 500px;
+    margin: 0 auto 5px;
+}
+
+.gx_enemy_place{
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin: 0 5px;
+}
+
+.gx_enemy_place div{
+    width: 40px;
+    height: 40px;
+}
+
+.gx_enemy_general{
+    background: red;
+}
+
+.gx_enemy_colonel{
+    background: orange;
+}
+
+.gx_enemy_major{
+    background: green;
+}
+
+.gx_enemy_soldier{
+    background: blue;
 }

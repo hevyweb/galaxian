@@ -1,13 +1,19 @@
 $(function() {
-    var enemy;
+    var enemyInterface = {
+        fire: function(){},
+        fly: function(){},
+    };
     
     var enemyBuilder = {
-        build: function(type){
+        types: {},
+        
+        build: function(type){console.log(type);
             var place = $('<div />').addClass('gx_enemy_place');
             if (type != null){
-                if (this.types[type] != undefined){
-                    //this.types[type] = 
+                if (this.types[type] === undefined){
+                    this.types[type] = $('<div />').addClass('gx_enemy_' + type);
                 }
+                this.types[type].clone().appendTo(place);
             }
             return place;
         }
@@ -52,37 +58,36 @@ $(function() {
         },
         
         buildHero: function(){
-            this.hero = $('<div />').addClass('gs_hero').appendTo(this.stage);
-            $('<div />').addClass('gs_hero_plain').appendTo(this.hero).append(
-                $('<div />').addClass('gs_missile')
+            this.hero = $('<div />').addClass('gx_hero').appendTo(this.stage);
+            $('<div />').addClass('gx_hero_plain').appendTo(this.hero).append(
+                $('<div />').addClass('gx_missile')
             );
         },
         
         buildEnemy: function(){
-            this.enemyContainer = $('<div />').eppandTo(this.stage);
+            this.enemyContainer = $('<div />').addClass('gx_enemies').appendTo(this.stage);
             var row;
-            for(var row = 0; row < enemyMap.length; row++){
-                row = $('<div />').addClass('enemyRow');
-                for(var enemy in enemyMap[row]){
-                    enemyBuilder.build(enemy).appendTo(row);
+            for(var r = 0; r < enemyMap.length; r++){
+                row = $('<div />').addClass('gx_enemy_row').appendTo(this.enemyContainer);
+                for(var e = 0; e < enemyMap[r].length; e++){
+                    enemyBuilder.build(enemyMap[r][e]).appendTo(row);
                 }
             }
-            enemybuilder.build
         },
         
         fire: function(){
-            var shell = $('.gs_missile');
+            var shell = $('.gx_missile');
             var position = shell.offset();
             shell.hide();
             var self = this;
-            this.missile = $('<div />').addClass('gs_missile_running').appendTo(this.stage);
+            this.missile = $('<div />').addClass('gx_missile_running').appendTo(this.stage);
             this.missile.css({
                 'top': position.top,
                 'left': position.left
             }).animate({'top': 0}, 2000, 'linear', function(){
                 $(this).remove();
                 self.missile = null;
-                $('.gs_missile').show();
+                $('.gx_missile').show();
             });
         },
         
