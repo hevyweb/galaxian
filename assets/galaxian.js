@@ -39,6 +39,8 @@ $(function() {
         
         missile: null,
         
+        enemyWidth: 40,
+        
         map: [],
         
         init: function(container){
@@ -101,10 +103,11 @@ $(function() {
                         if (self.map[X1] != undefined || self.map[X1] != null){
                             var enemy = self.map[X1];
                             if ((enemy.offset().top + enemy.height())>=Y){
-                                self.map[X1] = null;
                                 self.rebuildMapFragment(self.map[X1]);
+                                self.map[X1] = null;
                                 enemy.remove();
                                 $(this).finish();
+                                
                             }
                         }
                     }
@@ -154,12 +157,15 @@ $(function() {
         
         rebuildMapFragment: function(fragment)
         {
-            
+            var self = this;
             var X1 = fragment.offset().left;
-            var X2 = X1 + fragment.width();
-            for (;X1<=X2;X1++){
-                this.map[X1] = null;
-            }
+            var X2 = X1 + self.enemyWidth;
+            var filtered = $('.gx_enemy').filter(function(){
+                var offset = $(this).offset();
+                var Z1 = offset.left;
+                var Z2 = Z1 + self.enemyWidth;
+                return (X1>=Z1 && X1<=Z2) || (X2>=Z1 && X2<=Z2);
+            });
         }
     };
     
